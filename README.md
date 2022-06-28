@@ -26,50 +26,50 @@ When programming in Minecraft, beware of redstone interactions. Observers can ac
 
 | Instruction                 | Image                                                        | Block Name                | Description                                                  |
 | --------------------------- | ------------------------------------------------------------ | ------------------------- | ------------------------------------------------------------ |
-| Start                       | ![command_block](.\doc\block_thumbnails\command_block.png)   | Command Block             | Start the program, setting the IP to the direction the command block is pointing. |
-| End                         | ![bedrock](.\doc\block_thumbnails\bedrock.png)               | Bedrock                   | End the program.                                             |
-| Change Direction            | ![piston](.\doc\block_thumbnails\piston.png)                 | Piston                    | Set the IP direction to wherever the piston's head is pointing. |
-| Random Direction            | ![magenta_glazed_terracotta](.\doc\block_thumbnails\magenta_glazed_terracotta.png) | Magenta Glazed Terracotta | Set a random IP direction.                                   |
-| Skip                        | ![sea_lantern](.\doc\block_thumbnails\sea_lantern.png)       | Sea Lantern               | Jump over the next block.                                    |
-| Conditional Skip            | ![redstone_lamp](.\doc\block_thumbnails\redstone_lamp.png)   | Redstone Lamp             | Pop one value off the stack and jump over the next block if zero. |
-| Push 0-9                    | ![white_concrete](.\doc\block_thumbnails\white_concrete.png) | Concrete                  | Pushes 0-9 to the stack, depending on the block's color.     |
-| Push 10-90                  | ![red_terracotta](.\doc\block_thumbnails\red_terracotta.png) | Terracotta                | Pushes 10-90 to the stack, depending on the block's color.   |
-| Push 100-900                | ![orange_wool](.\doc\block_thumbnails\orange_wool.png)       | Wool                      | Pushes 100-900 to the stack, depending on the block's color. |
-| Push 1,000-9,000            | ![yellow_stained_glass](.\doc\block_thumbnails\yellow_stained_glass.png) | Stained Glass             | Pushes 1000-9000 to the stack, depending on the block's color. |
-| Push 1,000,000 to 9,000,000 | ![lime_shulker_box](.\doc\block_thumbnails\lime_shulker_box.png) | Shulker Box               | Pushes 1,000,000-9,000,000 to the stack, depending on the block's color. |
-| Add                         | ![iron_block](.\doc\block_thumbnails\iron_block.png)         | Iron Block                | Pop a, b. Push b + a.                                        |
-| Subtract                    | ![gold_block](.\doc\block_thumbnails\gold_block.png)         | Gold Block                | Pop a, b. Push b - a.                                        |
-| Multiply                    | ![diamond_block](.\doc\block_thumbnails\diamond_block.png)   | Diamond Block             | Pop a, b. Push b * a.                                        |
-| Integer Divide              | ![emerald_block](.\doc\block_thumbnails\emerald_block.png)   | Emerald Block             | Pop a, b. Push b / a. Uses integer division.                 |
-| Modulus                     | ![lapis_block](.\doc\block_thumbnails\lapis_block.png)       | Lapis Lazuli Block        | Pop a, b. Push b % a.                                        |
-| Exponent                    | ![netherite_block](.\doc\block_thumbnails\netherite_block.png) | Netherite Block           | Pop a, b. Push b^a. Negative exponents will truncate the result to 0. |
-| Negate                      | ![coal_block](.\doc\block_thumbnails\coal_block.png)         | Coal Block                | Negates the top of the stack.                                |
-| Not                         | ![obsidian](.\doc\block_thumbnails\obsidian.png)             | Obsidian                  | Pop a. Push 1 if a is 0, else push 0.                        |
-| Greater Than                | ![mossy_stone_bricks](.\doc\block_thumbnails\mossy_stone_bricks.png) | Mossy Stone Bricks        | Pop a, b. Push 1 if b > a, else push 0.                      |
-| Less Than                   | ![cracked_stone_bricks](.\doc\block_thumbnails\cracked_stone_bricks.png) | Cracked Stone Bricks      | Pop a, b. Push 1 if b < a, else push 0.                      |
-| If                          | ![observer](.\doc\block_thumbnails\observer.png)             | Observer                  | Pop one value off the stack. If it is 0, change the IP direction to the back of the block, else change the IP direction to the front. |
-| Duplicate                   | ![crafting_table](.\doc\block_thumbnails\crafting_table.png) | Crafting Table            | Duplicate the top value of the stack.                        |
-| Pop                         | ![magma_block](.\doc\block_thumbnails\magma_block.png)       | Magma Block               | Discard the top value of the stack.                          |
-| Clear                       | ![tnt](.\doc\block_thumbnails\tnt.png)                       | TNT                       | Reset the stack to empty.                                    |
-| Swap                        | ![pumpkin](.\doc\block_thumbnails\pumpkin.png)               | Pumpkin                   | Swap the top two elements of the stack.                      |
-| Rotate                      | ![melon](.\doc\block_thumbnails\melon.png)                   | Melon                     | Pop a. Rotate the top \|a\|+1 elements of the stack. If a is positive, make the bottom element on the top. If a is negative, make the top element on the bottom. |
-| Push Length                 | ![ancient_debris](.\doc\block_thumbnails\ancient_debris.png) | Ancient Debris            | Push the length of the stack onto the stack. Trailing zero values aren't counted towards the length. |
-| Numeric Output              | ![dispenser](.\doc\block_thumbnails\dispenser.png)           | Dispenser                 | Pop and print the top of the stack as a number, followed by a space. |
-| Text Output                 | ![dropper](.\doc\block_thumbnails\dropper.png)               | Dropper                   | Pop and print the top of the stack as an ASCII character.    |
-| Newline Output              | ![bookshelf](.\doc\block_thumbnails\bookshelf.png)           | Bookshelf                 | Prints a newline.                                            |
-| Raise Error                 | ![note_block](C:\Files\Programming\Python\MyCode\CraftyFunge\doc\block_thumbnails\note_block.png) | Note Block                | Raises an error and halts the program.                       |
-| Numeric Input               | ![chest](.\doc\block_thumbnails\chest.png)                   | Chest                     | Input a number and push to the stack. Pushes -1 upon EOF or invalid input. |
-| Text Input                  | ![ender_chest](.\doc\block_thumbnails\ender_chest.png)       | Ender chest               | Input one character and push its ASCII value to the stack. Pushes -1 upon EOF. |
-| Push Next Block Value       | ![jukebox](.\doc\block_thumbnails\jukebox.png)               | Jukebox                   | Read the next block's value in the direction of the IP, push it to the stack, then skip over that block. If the value is invalid, does nothing. |
-| Get Block                   | ![slime_block](.\doc\block_thumbnails\slime_block.png)       | Slime block               | Pop z, y, x. Get the block's value at (x, y, z) and push it onto the stack. If the value is invalid, does nothing. |
-| Set Block                   | ![honey_block](.\doc\block_thumbnails\honey_block.png)       | Honey block               | Pop z, y, x, B. Set the block at (x, y, z) to the block corresponding to the value of B. If the value is invalid, does nothing. |
-| Get Variable                | ![red_nether_bricks](.\doc\block_thumbnails\red_nether_bricks.png) | Red Nether Bricks         | Pop i. Push the value of the variable at index i.            |
-| Set Variable                | ![nether_bricks](.\doc\block_thumbnails\nether_bricks.png)   | Nether Bricks             | Pop i, v. Set the value of the variable at index i to value v. |
-| Push Current Position       | ![dark_prismarine](.\doc\block_thumbnails\dark_prismarine.png) | Dark Prismarine           | Push the IP's current coordinates x, y, z to the stack.      |
-| Goto                        | ![prismarine](.\doc\block_thumbnails\prismarine.png)         | Prismarine                | Pop z, y, x. Teleport the IP to (x, y, z), retaining the same direction. |
-| Tunnel                      | ![deepslate](.\doc\block_thumbnails\deepslate.png)           | Deepslate                 | Enter/exit tunneling mode.                                   |
-| Input Number Literal        | ![glass](.\doc\block_thumbnails\glass.png)                   | Glass                     | Enter/exit number literal input mode.                        |
-| Input Text Literal          | ![tinted_glass](.\doc\block_thumbnails\tinted_glass.png)     | Tinted Glass              | Enter/exit text literal input mode.                          |
+| Start                       | ![command_block](doc/block_thumbnails/command_block.png)     | Command Block             | Start the program, setting the IP to the direction the command block is pointing. |
+| End                         | ![bedrock](doc/block_thumbnails/bedrock.png)                 | Bedrock                   | End the program.                                             |
+| Change Direction            | ![piston](doc/block_thumbnails/piston.png)                   | Piston                    | Set the IP direction to wherever the piston's head is pointing. |
+| Random Direction            | ![magenta_glazed_terracotta](doc/block_thumbnails/magenta_glazed_terracotta.png) | Magenta Glazed Terracotta | Set a random IP direction.                                   |
+| Skip                        | ![sea_lantern](doc/block_thumbnails/sea_lantern.png)         | Sea Lantern               | Jump over the next block.                                    |
+| Conditional Skip            | ![redstone_lamp](doc/block_thumbnails/redstone_lamp.png)     | Redstone Lamp             | Pop one value off the stack and jump over the next block if zero. |
+| Push 0-9                    | ![white_concrete](doc/block_thumbnails/white_concrete.png)   | Concrete                  | Pushes 0-9 to the stack, depending on the block's color.     |
+| Push 10-90                  | ![red_terracotta](doc/block_thumbnails/red_terracotta.png)   | Terracotta                | Pushes 10-90 to the stack, depending on the block's color.   |
+| Push 100-900                | ![orange_wool](doc/block_thumbnails/orange_wool.png)         | Wool                      | Pushes 100-900 to the stack, depending on the block's color. |
+| Push 1,000-9,000            | ![yellow_stained_glass](doc/block_thumbnails/yellow_stained_glass.png) | Stained Glass             | Pushes 1000-9000 to the stack, depending on the block's color. |
+| Push 1,000,000 to 9,000,000 | ![lime_shulker_box](doc/block_thumbnails/lime_shulker_box.png) | Shulker Box               | Pushes 1,000,000-9,000,000 to the stack, depending on the block's color. |
+| Add                         | ![iron_block](doc/block_thumbnails/iron_block.png)           | Iron Block                | Pop a, b. Push b + a.                                        |
+| Subtract                    | ![gold_block](doc/block_thumbnails/gold_block.png)           | Gold Block                | Pop a, b. Push b - a.                                        |
+| Multiply                    | ![diamond_block](doc/block_thumbnails/diamond_block.png)     | Diamond Block             | Pop a, b. Push b * a.                                        |
+| Integer Divide              | ![emerald_block](doc/block_thumbnails/emerald_block.png)     | Emerald Block             | Pop a, b. Push b / a. Uses integer division.                 |
+| Modulus                     | ![lapis_block](doc/block_thumbnails/lapis_block.png)         | Lapis Lazuli Block        | Pop a, b. Push b % a.                                        |
+| Exponent                    | ![netherite_block](doc/block_thumbnails/netherite_block.png) | Netherite Block           | Pop a, b. Push b^a. Negative exponents will truncate the result to 0. |
+| Negate                      | ![coal_block](doc/block_thumbnails/coal_block.png)           | Coal Block                | Negates the top of the stack.                                |
+| Not                         | ![obsidian](doc/block_thumbnails/obsidian.png)               | Obsidian                  | Pop a. Push 1 if a is 0, else push 0.                        |
+| Greater Than                | ![mossy_stone_bricks](doc/block_thumbnails/mossy_stone_bricks.png) | Mossy Stone Bricks        | Pop a, b. Push 1 if b > a, else push 0.                      |
+| Less Than                   | ![cracked_stone_bricks](doc/block_thumbnails/cracked_stone_bricks.png) | Cracked Stone Bricks      | Pop a, b. Push 1 if b < a, else push 0.                      |
+| If                          | ![observer](doc/block_thumbnails/observer.png)               | Observer                  | Pop one value off the stack. If it is 0, change the IP direction to the back of the block, else change the IP direction to the front. |
+| Duplicate                   | ![crafting_table](doc/block_thumbnails/crafting_table.png)   | Crafting Table            | Duplicate the top value of the stack.                        |
+| Pop                         | ![magma_block](doc/block_thumbnails/magma_block.png)         | Magma Block               | Discard the top value of the stack.                          |
+| Clear                       | ![tnt](doc/block_thumbnails/tnt.png)                         | TNT                       | Reset the stack to empty.                                    |
+| Swap                        | ![pumpkin](doc/block_thumbnails/pumpkin.png)                 | Pumpkin                   | Swap the top two elements of the stack.                      |
+| Rotate                      | ![melon](doc/block_thumbnails/melon.png)                     | Melon                     | Pop a. Rotate the top \|a\|+1 elements of the stack. If a is positive, make the bottom element on the top. If a is negative, make the top element on the bottom. |
+| Push Length                 | ![ancient_debris](doc/block_thumbnails/ancient_debris.png)   | Ancient Debris            | Push the length of the stack onto the stack. Trailing zero values aren't counted towards the length. |
+| Numeric Output              | ![dispenser](doc/block_thumbnails/dispenser.png)             | Dispenser                 | Pop and print the top of the stack as a number, followed by a space. |
+| Text Output                 | ![dropper](doc/block_thumbnails/dropper.png)                 | Dropper                   | Pop and print the top of the stack as an ASCII character.    |
+| Newline Output              | ![bookshelf](doc/block_thumbnails/bookshelf.png)             | Bookshelf                 | Prints a newline.                                            |
+| Raise Error                 | ![note_block](doc/block_thumbnails/note_block.png)           | Note Block                | Raises an error and halts the program.                       |
+| Numeric Input               | ![chest](doc/block_thumbnails/chest.png)                     | Chest                     | Input a number and push to the stack. Pushes -1 upon EOF or invalid input. |
+| Text Input                  | ![ender_chest](doc/block_thumbnails/ender_chest.png)         | Ender chest               | Input one character and push its ASCII value to the stack. Pushes -1 upon EOF. |
+| Push Next Block Value       | ![jukebox](doc/block_thumbnails/jukebox.png)                 | Jukebox                   | Read the next block's value in the direction of the IP, push it to the stack, then skip over that block. If the value is invalid, does nothing. |
+| Get Block                   | ![slime_block](doc/block_thumbnails/slime_block.png)         | Slime block               | Pop z, y, x. Get the block's value at (x, y, z) and push it onto the stack. If the value is invalid, does nothing. |
+| Set Block                   | ![honey_block](doc/block_thumbnails/honey_block.png)         | Honey block               | Pop z, y, x, B. Set the block at (x, y, z) to the block corresponding to the value of B. If the value is invalid, does nothing. |
+| Get Variable                | ![red_nether_bricks](doc/block_thumbnails/red_nether_bricks.png) | Red Nether Bricks         | Pop i. Push the value of the variable at index i.            |
+| Set Variable                | ![nether_bricks](doc/block_thumbnails/nether_bricks.png)     | Nether Bricks             | Pop i, v. Set the value of the variable at index i to value v. |
+| Push Current Position       | ![dark_prismarine](doc/block_thumbnails/dark_prismarine.png) | Dark Prismarine           | Push the IP's current coordinates x, y, z to the stack.      |
+| Goto                        | ![prismarine](doc/block_thumbnails/prismarine.png)           | Prismarine                | Pop z, y, x. Teleport the IP to (x, y, z), retaining the same direction. |
+| Tunnel                      | ![deepslate](doc/block_thumbnails/deepslate.png)             | Deepslate                 | Enter/exit tunneling mode.                                   |
+| Input Number Literal        | ![glass](doc/block_thumbnails/glass.png)                     | Glass                     | Enter/exit number literal input mode.                        |
+| Input Text Literal          | ![tinted_glass](doc/block_thumbnails/tinted_glass.png)       | Tinted Glass              | Enter/exit text literal input mode.                          |
 
 All coordinates are relative to the starting command block, although it is recommended to place the starting block at (0, 0, 0) so the coordinates line up.
 
