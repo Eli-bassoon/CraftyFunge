@@ -1,0 +1,1 @@
+pyinstaller --clean ./src/craftyfunge.spec
