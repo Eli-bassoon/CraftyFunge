@@ -1,6 +1,6 @@
 # CraftyFunge
 
-CraftyFunge is a 3-dimensional esoteric programming language written by placing Minecraft blocks. It requires 1.19 Java Edition. Programs can be run directly in Minecraft or by exporting a program from a structure block and running the external interpreter. CraftyFunge is executable in vanilla Minecraft using the provided world with an embedded data pack.
+CraftyFunge is a 3-dimensional esoteric programming language written by placing Minecraft blocks. It requires 1.19 Java Edition. Programs can be run directly in Minecraft or with the external interpreter. The external interpreter accepts programs exported from structure blocks. CraftyFunge is executable in vanilla Minecraft using the provided world with an embedded data pack.
 
 ### The Instruction Pointer
 
@@ -18,7 +18,7 @@ When run in Minecraft, the stack has a maximum length of 128, and there are 128 
 
 When programming in Minecraft, beware of redstone interactions. Observers can activate pistons placed next to them, and the button used to activate the starting command block can do so as well.
 
-### [Hello World Program Video](https://imgur.com/a/EJOx5Cl)
+### [Hello World Program Video](https://imgur.com/vwolel7)
 
 
 
@@ -109,7 +109,7 @@ To push 0 to the stack, use white concrete.
 
 ### Block Values
 
-*Get block*, *set block*, and *input text literal* assign a numeric value to each block. Concrete/terracotta/wool/stained glass/shulker box blocks that can be used to push numbers all have the same block values. An exception to this is air, which has a block value of 0 instead of white concrete, which has the special value of -2,147,483,648. Other blocks are used to fill in the gaps.
+*Get block*, *set block*, and *input text literal* assign a numeric value to each block. Concrete/terracotta/wool/stained glass/shulker box blocks that can be used to push numbers all have the same block values as their literal forms. An exception to this is air, which has a block value of 0 instead of white concrete, which has the special value of -2,147,483,648. Other blocks are used to fill in the gaps.
 
 For a full list of block values, see [`block_values.md`](./doc/block_values.md)
 
