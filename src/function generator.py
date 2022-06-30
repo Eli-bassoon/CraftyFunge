@@ -33,7 +33,7 @@ BLOCKS_TO_FN_NAMES = [
     (NOT, 'not'),
     (DIR, 'change_direction'),
     (RANDOM_DIR, 'random_direction'),
-    (SKIP, 'move'),
+    (SKIP, 'skip'),
     (SKIP_COND, 'conditional_skip'),
     (TUNNEL, 'toggles/tunnel/tunnel_toggle'),
     (IN_NUM_LITERAL, 'toggles/in_num_literal/in_num_literal_toggle'),
@@ -185,11 +185,21 @@ execute as @e[{FUNGIE}] at @s if score $ip direction matches 5 run tp ~ ~-1 ~
     writeFile(filename, lines)
 
 
+def skip():
+    filename = os.path.join(START_PATH, 'skip.mcfunction')
+    lines = []
+    
+    lines.append('function craftyfunge:move')
+    lines.append('scoreboard players set $ip can_change_mode 0')
+    
+    writeFile(filename, lines)
+
+
 def conditionalSkip():
     filename = os.path.join(START_PATH, 'conditional_skip.mcfunction')
     lines = []
     lines.append('function craftyfunge:pop_stack1')
-    lines.append('execute if score $stack stack1 matches 0 run function craftyfunge:move')
+    lines.append('execute if score $stack stack1 matches 0 run function craftyfunge:skip')
     
     # Temp reset stackin
     lines.append('scoreboard players set $stack stackin 0')
@@ -218,8 +228,8 @@ def toggleMode(mode):
     filename = os.path.join(START_PATH, f'toggles/{modeName}/{modeName}_toggle.mcfunction')
     lines = []
     
-    lines.append(f'execute unless score $ip mode matches {mode} if score $ip changed_mode matches 0 run function craftyfunge:toggles/{modeName}/{modeName}_start')
-    lines.append(f'execute if score $ip mode matches {mode} if score $ip changed_mode matches 0 run function craftyfunge:toggles/{modeName}/{modeName}_stop')
+    lines.append(f'execute unless score $ip mode matches {mode} if score $ip can_change_mode matches 1 run function craftyfunge:toggles/{modeName}/{modeName}_start')
+    lines.append(f'execute if score $ip mode matches {mode} if score $ip can_change_mode matches 1 run function craftyfunge:toggles/{modeName}/{modeName}_stop')
     
     writeFile(filename, lines)
     
@@ -230,7 +240,7 @@ def toggleMode(mode):
     
     lines.append(f'team join {MODE_NAMES[mode]}')
     lines.append(f'scoreboard players set $ip mode {mode}')
-    lines.append(f'scoreboard players set $ip changed_mode 1')
+    lines.append(f'scoreboard players set $ip can_change_mode 0')
     
     writeFile(filename, lines)
     
@@ -778,10 +788,11 @@ def start():
     for i in range(1, TEMPS+1):
         lines.append(f'scoreboard players set $temp temp{i} 0')
     
-    for player, objective in [('$stack', 'stackin'), ('$stack', 'stacklen'), ('$ip', 'changed_mode'), ('$ip', 'went_to')]:
+    for player, objective in [('$stack', 'stackin'), ('$stack', 'stacklen'), ('$ip', 'went_to')]:
         lines.append(f'scoreboard players set {player} {objective} 0')
     
     lines.append(f'scoreboard players set $ip mode {Modes.DEFAULT}')
+    lines.append('scoreboard players set $ip can_change_mode 1')
     
     for axis, objective in enumerate(AXIS_NAMES):
         lines.append(f'execute store result score $start_pos {objective} run data get entity @e[tag=StartAnchor,limit=1] Pos[{axis}] 1')
@@ -943,7 +954,7 @@ def resume():
     # Change fungie color to green
     lines.append(f'team join {MODE_NAMES[Modes.DEFAULT]} @e[{FUNGIE}]')
     lines.append(f'scoreboard players set $ip mode {Modes.DEFAULT}')
-    lines.append(f'scoreboard players set $ip changed_mode 0')
+    lines.append(f'scoreboard players set $ip can_change_mode 1')
     lines.append(f'scoreboard players set $ip running 1')
     lines.append(f'scoreboard players set $ip stepping 0')
     
@@ -1522,7 +1533,7 @@ def initScoreboard():
     
     for objective in ['stackin', 'stacklen', 'direction', 
                       'numdirs', 'ten', 'minus',
-                      'mode', 'changed_mode', 
+                      'mode', 'can_change_mode', 
                       'went_to', 'stepping',
                       'running', 'move_countdown', 'delay'] + list(AXIS_NAMES):
         lines.append(f'scoreboard objectives add {objective} dummy')
@@ -1553,13 +1564,13 @@ def runStep():
     lines = []
     
     # Reset changed mode
-    lines.append('scoreboard players set $ip changed_mode 0')
+    lines.append('scoreboard players set $ip can_change_mode 1')
     
     # Execute each mode
     for mode in Modes:
         # Only evalute if not stopped and mode hasn't already been changed
         if mode != Modes.STOPPED:
-            lines.append(f'execute as @s if score $ip mode matches {mode} if score $ip changed_mode matches 0 run function craftyfunge:steps/run_step_{MODE_NAMES[mode]}')
+            lines.append(f'execute if score $ip mode matches {mode} if score $ip can_change_mode matches 1 run function craftyfunge:steps/run_step_{MODE_NAMES[mode]}')
     
     # Move
     lines.append(f'execute unless score $ip direction matches -1 unless score $ip went_to matches 1 run function craftyfunge:move')
@@ -1649,3 +1660,4 @@ def runEverything():
         func()
 
 
+runEverything()
