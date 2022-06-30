@@ -16,7 +16,7 @@ When run in Minecraft, the stack has a maximum length of 128, and there are 128 
 
 ### Take Note
 
-When programming in Minecraft, beware of redstone interactions. Observers can activate pistons placed next to them, and the button used to activate the starting command block can do so as well.
+When programming in Minecraft, beware of redstone interactions. Observers can activate pistons placed next to them, and the button used to activate the starting command block can do so as well. If this happens when importing a structure, keep reloading the structure. Eventually the observers should stop updating and the program will work.
 
 ### [Hello World Program Video](https://imgur.com/vwolel7)
 
