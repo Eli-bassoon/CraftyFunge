@@ -976,7 +976,12 @@ def clearProgram():
     filename = os.path.join(START_PATH, 'clear_program.mcfunction')
     lines = []
     
-    lines.append('fill ~1 ~ ~1 ~35 ~25 ~35 minecraft:air')
+    lines.append('fill ~1 ~ ~1 ~39 ~20 ~39 minecraft:air')
+    lines.append('fill ~40 ~ ~1 ~79 ~20 ~79 minecraft:air')
+    lines.append('fill ~1 ~ ~40 ~39 ~20 ~79 minecraft:air')
+    lines.append('fill ~1 ~21 ~1 ~39 ~40 ~39 minecraft:air')
+    lines.append('fill ~40 ~21 ~1 ~79 ~40 ~79 minecraft:air')
+    lines.append('fill ~1 ~21 ~40 ~39 ~40 ~79 minecraft:air')
     lines.append('setblock ~4 ~ ~4 minecraft:command_block[facing=south]{Command:"function craftyfunge:start"}')
     lines.append('setblock ~3 ~ ~4 minecraft:stone_button[face=wall,facing=west]')
     lines.append('kill @e[type=minecraft:item]')
