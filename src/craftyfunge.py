@@ -215,7 +215,7 @@ class CraftyFunge():
             self.runStep()
 
             if self.debug:
-                stackAsText = ''.join([chr(n) for n in self.stack])
+                stackAsText = ''.join([chr(n) for n in self.stack if (n >= 32 and n < 127)])
                 self.debugBuffer.append(f' Step: {self.steps}')
                 self.debugBuffer.append(f'  Pos: {initPos}')
                 self.debugBuffer.append(f'Block: {initBlock}')
