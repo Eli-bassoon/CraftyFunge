@@ -1,4 +1,9 @@
 -2147483648	white_concrete
+-177	observer	facing	up
+-176	observer	facing	down
+-175	observer	facing	east
+-174	observer	facing	west
+-173	observer	facing	north
 -172	waxed_cut_copper
 -171	waxed_copper_block
 -170	warped_wart_block
@@ -193,13 +198,13 @@
 19	mossy_stone_bricks
 20	orange_terracotta
 21	cracked_stone_bricks
-22	piston
+22	piston	facing	north
 23	magenta_glazed_terracotta
 24	sea_lantern
 25	redstone_lamp
 26	deepslate
 27	glass
-28	observer
+28	observer	facing	south
 29	crafting_table
 30	yellow_terracotta
 31	magma_block
@@ -392,6 +397,11 @@
 218	jungle_stairs
 219	jungle_wood
 220	lapis_ore
+221	piston	facing	south
+222	piston	facing	east
+223	piston	facing	west
+224	piston	facing	up
+225	piston	facing	down
 300	yellow_wool
 400	lime_wool
 500	green_wool

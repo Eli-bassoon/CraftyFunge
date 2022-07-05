@@ -1,6 +1,11 @@
 | Value | Block | ASCII Character |
 | --- | --- | --- |
 | -2147483648 | White Concrete |  |
+| -177 | Observer (facing up) |  |
+| -176 | Observer (facing down) |  |
+| -175 | Observer (facing east) |  |
+| -174 | Observer (facing west) |  |
+| -173 | Observer (facing north) |  |
 | -172 | Waxed Cut Copper |  |
 | -171 | Waxed Copper Block |  |
 | -170 | Warped Wart Block |  |
@@ -195,13 +200,13 @@
 | 19 | Mossy Stone Bricks |  |
 | 20 | Orange Terracotta |  |
 | 21 | Cracked Stone Bricks |  |
-| 22 | Piston |  |
+| 22 | Piston (facing north) |  |
 | 23 | Magenta Glazed Terracotta |  |
 | 24 | Sea Lantern |  |
 | 25 | Redstone Lamp |  |
 | 26 | Deepslate |  |
 | 27 | Glass |  |
-| 28 | Observer |  |
+| 28 | Observer (facing south) |  |
 | 29 | Crafting Table |  |
 | 30 | Yellow Terracotta |  |
 | 31 | Magma Block |  |
@@ -394,6 +399,11 @@
 | 218 | Jungle Stairs |  |
 | 219 | Jungle Wood |  |
 | 220 | Lapis Ore |  |
+| 221 | Piston (facing south) |  |
+| 222 | Piston (facing east) |  |
+| 223 | Piston (facing west) |  |
+| 224 | Piston (facing up) |  |
+| 225 | Piston (facing down) |  |
 | 300 | Yellow Wool |  |
 | 400 | Lime Wool |  |
 | 500 | Green Wool |  |

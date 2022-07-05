@@ -25,6 +25,7 @@ def writeBlockValues():
     
     # Dict of number to block
     blockValuesDict = dict()
+    extraDataDict = dict()
     totalNumPossible = len(blockValues) + len(BLOCK_TO_PUSHNUM)
     halfLen = int(math.ceil(totalNumPossible/2))
     
@@ -37,6 +38,10 @@ def writeBlockValues():
     # Positive values
     for i in range(1, maxIn, +1):
         if i not in pushableNums:
+            if blockValues[n] == 'piston':
+                extraDataDict[i] = {'facing':'north'}
+            elif blockValues[n] == 'observer':
+                extraDataDict[i] = {'facing':'south'}
             blockValuesDict[i] = blockValues[n]
             n += 1
     # Negative values
@@ -50,6 +55,15 @@ def writeBlockValues():
             n = BLOCK_TO_PUSHNUM[block]
             blockValuesDict[n] = block
     
+    # Piston and observer
+    for direction_i in range(1, 6):
+        piston_i = maxIn+direction_i-1
+        observer_i = minIn-direction_i+1
+        blockValuesDict[piston_i] = 'piston'
+        extraDataDict[piston_i] = {'facing': DIRS[direction_i]}
+        blockValuesDict[observer_i] = 'observer'
+        extraDataDict[observer_i] = {'facing': DIRS_INV[direction_i]}
+    
     # Air
     blockValuesDict[0] = 'air'
     # White concrete
@@ -61,7 +75,17 @@ def writeBlockValues():
     with open('data/block_to_value.csv', 'w', newline='') as f:
         writer = csv.writer(f, delimiter='\t')
         for blockValue in sorted(blockValuesDict.keys()):
-            writer.writerow((blockValue, blockValuesDict[blockValue]))
+            row = [blockValue, blockValuesDict[blockValue]]
+            # Adding extra data if applicable
+            if blockValue in extraDataDict.keys():
+                extraData = extraDataDict[blockValue]
+                for key in EXTRA_DATA_ORDER:
+                    if key in extraData:
+                        row.append(key)
+                        row.append(extraData[key])
+                        
+            writer.writerow(row)
+
 writeBlockValues()
 
 
@@ -70,9 +94,14 @@ def writeBlockValueTableDoc(VALUE_TO_BLOCK):
     # Get table of (value, block)
     table = []
     for value in sorted(VALUE_TO_BLOCK.keys()):
-        block = VALUE_TO_BLOCK[value]
+        block = getNameFromValue(value)
         block = block.replace('_', ' ')
         block = block.title()
+        
+        # Add extra information to block
+        if getNameFromValue(value) in BLOCKS_WITH_EXTRA_DATA:
+            extra = ', '.join(f'{k} {v}' for k,v in VALUE_TO_BLOCK[value][1])
+            block = f'{block} ({extra})'
         
         if value == ord('\n'):
             c = 'Newline'
@@ -96,6 +125,7 @@ def writeBlockValueTableDoc(VALUE_TO_BLOCK):
     with open(resourcePath('../doc/block_values.md'), 'w') as f:
         for row in table:
             f.write(joinLine(row))
+            
 writeBlockValueTableDoc(VALUE_TO_BLOCK)
 
 

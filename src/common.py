@@ -161,6 +161,9 @@ MODE_NAMES = {
     Modes.PAUSED            : 'paused',
 }
 
+BLOCKS_WITH_EXTRA_DATA = ['piston', 'observer']
+EXTRA_DATA_ORDER = ['facing']
+
 
 # Gets a path to a resource depending on if it's bundled or not
 def resourcePath(relPath, config=False):
@@ -205,19 +208,54 @@ def findNumColors():
 BLOCK_TO_PUSHNUM = findNumColors()
 
 
+# Generates consistent paired tuples from extra data
+def getExtraDataTup(block, extraData):
+    extraDataPairs = []
+    for key in EXTRA_DATA_ORDER:
+        if key in extraData:
+            extraDataPairs.append((key, extraData[key]))
+            
+    return (block, tuple(extraDataPairs))
+
+
 # Read block values from csv
 def readBlockValues():
-    import csv
     valueToBlock = dict()
+    
     with open(resourcePath('data/block_to_value.csv'), 'r', newline='') as f:
         reader = csv.reader(f, delimiter='\t')
-        for value, block in reader:
-            valueToBlock[int(value)] = block
+        for row in reader:
+            # Value to block
+            value = row[0]
+            block = row[1]
+            if block not in BLOCKS_WITH_EXTRA_DATA:
+                valueToBlock[int(value)] = block
+            
+            # Extra data (if applicable)
+            else:
+                row = row[2:]
+                # Get value/extra data conversions
+                extraData = dict()
+                # Get values to extra data
+                for i in range(len(row)//2):
+                    extraData[row[i]] = row[i+1]
+                
+                valueToBlock[int(value)] = getExtraDataTup(block, extraData)
     
     blockToValue = invertDict(valueToBlock)
     
     return valueToBlock, blockToValue
 VALUE_TO_BLOCK, BLOCK_TO_VALUE = readBlockValues()
+
+
+# Get a block's name from extra data
+def getNameFromValue(value):
+    v = VALUE_TO_BLOCK[value]
+    if isinstance(v, str):
+        return v
+    # Extra data means the name is the first element
+    else:
+        return v[0]
 
 
 # Used for runAll in "function generator.py"

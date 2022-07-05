@@ -149,6 +149,20 @@ def binaryDecode(negScoreboard, toScoreboard, maxHeight):
     return lines
 
 
+# Gets the block predicate from a block value
+def getBlockPredicate(n):
+    block = getNameFromValue(n)
+    # Make leaves persistent
+    if block.endswith('leaves'):
+        block = block + '[persistent=true]'
+    # Rotateable blocks
+    elif block in BLOCKS_WITH_EXTRA_DATA:
+        extraPredicate = ','.join([f'{k}={v}' for k,v in VALUE_TO_BLOCK[n][1]])
+        block = f'{block}[{extraPredicate}]'
+        
+    return block
+
+
 # A helper function to get the current block and push it to the stack
 def pushCurrBlock():
     filename = os.path.join(START_PATH, 'push_curr_block.mcfunction')
@@ -159,8 +173,9 @@ def pushCurrBlock():
     
     # Get block
     for n in sorted(VALUE_TO_BLOCK.keys()):
-        lines.append(f'execute at @s if block ~ ~ ~ {VALUE_TO_BLOCK[n]} run scoreboard players set $stack stackin {n}')
-        lines.append(f'execute at @s if block ~ ~ ~ {VALUE_TO_BLOCK[n]} run scoreboard players set $temp temp1 1')
+        block = getBlockPredicate(n)
+        lines.append(f'execute at @s if block ~ ~ ~ {block} run scoreboard players set $stack stackin {n}')
+        lines.append(f'execute at @s if block ~ ~ ~ {block} run scoreboard players set $temp temp1 1')
     
     # Push
     lines.append('execute if score $temp temp1 matches 1 run function craftyfunge:push_stack')
@@ -1209,11 +1224,7 @@ def setBlock():
     
     # Set block
     for n in sorted(VALUE_TO_BLOCK.keys()):
-        block = VALUE_TO_BLOCK[n]
-        # Make leaves persistent
-        if block.endswith('leaves'):
-            block = block + '[persistent=true]'
-        
+        block = getBlockPredicate(n)
         lines.append(f'execute at @s if score $stack stack4 matches {n} run setblock ~ ~ ~ {block}')
     
     # Clean up temp entity
@@ -1655,7 +1666,7 @@ def runEverything():
     # Haven't run it yet, if it's bad then manually change badFuncs back to evything not a function
     import types
     funcs = [f for f in globals().values() if type(f) == types.FunctionType]
-    badFuncs = [getSelector, writeFile, 
+    badFuncs = [getSelector, writeFile, getBlockPredicate,
                 binaryTeleport, binaryEncode, binaryDecode,
                 toggleMode, runEverything] + getBadFuncs()
     for func in badFuncs:
@@ -1665,4 +1676,5 @@ def runEverything():
         func()
 
 
-runEverything()
+setBlock()
+pushCurrBlock()

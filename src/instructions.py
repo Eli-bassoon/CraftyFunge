@@ -28,12 +28,21 @@ class ModeIsr(object):
         
         self.stack.append(n)
     
+    # Push the block at the pos (x, y, z)
+    def pushBlockAtPos(self, x, y, z):
+        block = self.interp.getBlock(x, y, z)
+        if block in BLOCKS_WITH_EXTRA_DATA:
+            if block in ['piston', 'observer']:
+                extra = (('facing', self.interp.getFacing(x, y, z)), )
+                block = (block, extra)
+        
+        # Only push if possible to, otherwise do nothing
+        if block in BLOCK_TO_VALUE:
+            self.push(self.interp.getBlockVal(block))
+    
     # Push the current block's value to the stack
     def pushCurrBlock(self):
-        self.interp.block = self.interp.getBlock(*self.interp.pos)
-        # Only push if possible to, otherwise do nothing
-        if self.interp.block in BLOCK_TO_VALUE:
-            self.push(self.interp.getBlockVal(self.interp.block))
+        self.pushBlockAtPos(*self.interp.pos)
     
     # Arithmetic
     def add(self):
@@ -466,11 +475,7 @@ class ModeIsrDefault(ModeIsr):
     # Get/set blocks and goto
     def getBlock(self):
         z, y, x = self.popN(3)
-        
-        block = self.interp.getBlock(x, y, z)
-        # Only push if possible to, otherwise do nothing
-        if block in BLOCK_TO_VALUE:
-            self.push(self.interp.getBlockVal(block))
+        self.pushBlockAtPos(x, y, z)
 
 
     def setBlock(self):
@@ -481,11 +486,20 @@ class ModeIsrDefault(ModeIsr):
             return
         
         block = VALUE_TO_BLOCK[n]
+        # Check for extra data
+        if isinstance(block, tuple):
+            extra = dict(block[1])
+            block = block[0]
+        
         blockDict = {'Name':block}
         
         properties = dict()
+        # Special properties
         if block.endswith('leaves'):
             properties['persistent'] = True
+        # Extra data
+        elif block in ['piston', 'observer']:
+            properties['facing'] = extra['facing']
         
         if properties:
             blockDict['Properties'] = properties
