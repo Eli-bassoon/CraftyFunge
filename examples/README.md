@@ -6,6 +6,7 @@ These are already in the world download, and can be loaded from a structure bloc
 | ----------------- | ------------------------------------------------------------ |
 | `brainfuck.bf`    | A brainfuck interpreter. Horribly slow and inefficient, with a maximum program length of 40<sup>3</sup>=64,000. Input to brainfuck must be separated by `!`. I highly recommend executing this with the external interpreter rather than in Minecraft. If you are pasting in a program to STDIN rather than an external file, you must include an exclamation point as the last character of the program before any input. |
 | `cat.nbt`         | A cat program.                                               |
+| `deadfish.nbt`    | Interprets the [Deadfish](https://esolangs.org/wiki/Deadfish) esoteric programming language. |
 | `digitalroot.nbt` | Calculates the [digital root](https://en.wikipedia.org/wiki/Digital_root) of the input, found by iteratively adding the digits of the previous result until a single-digit number is reached. |
 | `disan.nbt`       | Implements the [Disan count](https://esolangs.org/wiki/Disan_Count) algorithm, which prints all the even numbers up to the input. |
 | `factorial.nbt`   | Calculates the factorial of the input.                       |
